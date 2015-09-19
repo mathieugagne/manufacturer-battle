@@ -4,7 +4,7 @@ require 'faye/websocket'
 require 'eventmachine'
 
 EM.run {
-  url = 'ws://localhost:5000/'
+  url = 'ws://manufacturer-battle.herokuapp.com/'
   ws = Faye::WebSocket::Client.new(url)
 
   platforms = %w(Linux Macintosh Windows Other)
