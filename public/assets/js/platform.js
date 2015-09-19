@@ -7,7 +7,7 @@ var data = {
       strokeColor: "rgba(220,220,220,0.8)",
       highlightFill: "rgba(220,220,220,0.75)",
       highlightStroke: "rgba(220,220,220,1)",
-      data: [65, 59, 80, 96]
+      data: [0, 0, 0, 0]
     }
   ]
 };
