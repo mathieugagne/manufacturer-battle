@@ -1,5 +1,5 @@
 var data = {
-  labels: ["Linux", "Macintosh", "Windows", "iPhone", "Other"],
+  labels: ["Linux", "Macintosh", "Windows", "iPhone"],
   datasets: [
     {
       label: "Platform Battle",
@@ -7,7 +7,7 @@ var data = {
       strokeColor: "rgba(220,220,220,0.8)",
       highlightFill: "rgba(220,220,220,0.75)",
       highlightStroke: "rgba(220,220,220,1)",
-      data: [0, 0, 0, 0, 0]
+      data: [0, 0, 0, 0]
     }
   ]
 };
