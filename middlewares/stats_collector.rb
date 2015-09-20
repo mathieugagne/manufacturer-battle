@@ -14,6 +14,7 @@ module ManufacturerBattle
       @clients = []
       uri = URI.parse(ENV["REDISCLOUD_URL"])
       @redis = Redis.new(host: uri.host, port: uri.port, password: uri.password)
+      reset_statistics
       Thread.new do
         redis_sub = Redis.new(host: uri.host, port: uri.port, password: uri.password)
         redis_sub.subscribe(CHANNEL) do |on|
@@ -49,6 +50,8 @@ module ManufacturerBattle
       ws.on :message do |event|
         p [:message, event.data]
         @redis.publish(CHANNEL, event.data)
+        @redis.sadd('labels', event.data)
+        @redis.incr(event.data)
       end
 
       ws.on :close do |event|
@@ -58,5 +61,14 @@ module ManufacturerBattle
 
       ws
     end
+
+    def reset_statistics
+      @redis.del('labels')
+      @redis.sadd('labels', 'iPhone')
+      @redis.sadd('labels', 'Android')
+      @redis.set('iPhone', 0)
+      @redis.set('Android', 0)
+    end
+
   end
 end
