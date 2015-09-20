@@ -4,11 +4,17 @@ var ws       = new WebSocket(uri);
 
 subscribe = function() {
   ws.onmessage = function(event){
-    myBarChart.eachBars(function(bar){
-      if (bar.label === event.data) {
-        ++bar.value;
-      }
-    });
+    var bars = myBarChart.datasets[0].bars;
+    var labels = $.map(bars, function(bar) { return bar.label; });
+    if($.inArray(event.data, labels) !== -1) {
+      myBarChart.eachBars(function(bar){
+        if (bar.label === event.data) {
+          ++bar.value;
+        }
+      });
+    } else {
+      myBarChart.addData([1], event.data);
+    }
     myBarChart.update();
   };
   ws.onopen = function(event){
