@@ -4,11 +4,12 @@ require 'faye/websocket'
 require 'eventmachine'
 
 EM.run {
+  # url = 'ws://localhost:5000/'
   url = 'ws://manufacturer-battle.herokuapp.com/'
   ws = Faye::WebSocket::Client.new(url)
 
-  platforms = %w(Linux Macintosh Windows Other)
-  timer = EM.add_periodic_timer(0.1) do
+  platforms = %w(Macintosh iPhone iPhone iPhone Android Android Android Android ChromeOS)
+  timer = EM.add_periodic_timer(0.05) do
     begin
       ws.send(platforms.sample)
     rescue NoMethodError
